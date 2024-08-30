@@ -1,0 +1,68 @@
+# waveformIOC.db
+#
+# EPICS database file for Keysight 33500B Waveform Generator
+#
+# Author : Kim Yunho
+# Date   : 2024-08-22
+# Version: 1.0
+
+record(ai, "$(SYS)$(DEV)Frequency-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@waveformIOC.proto getFrequency() $(PORT)")
+    field(SCAN, "1 second")
+}
+
+record(ao, "$(SYS)$(DEV)Frequency-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@waveformIOC.proto setFrequency() $(PORT)")
+    field(PREC, "3")
+}
+
+record(ai, "$(SYS)$(DEV)Amplitude-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@waveformIOC.proto getAmplitude() $(PORT)")
+    field(SCAN, "1 second")
+}
+
+record(ao, "$(SYS)$(DEV)Amplitude-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@waveformIOC.proto setAmplitude() $(PORT)")
+    #field(PREC, "3")
+}
+
+# New bi record for on/off status (read)
+record(bi, "$(SYS)$(DEV)OnOff-RB") {
+    field(DTYP, "stream")
+    field(INP, "@waveformIOC.proto getOnOff() $(PORT)")
+    field(ZNAM, "0")
+    field(ONAM, "1")
+    field(SCAN, "1 second")
+}
+
+# New bo record for on/off control (write)
+record(bo, "$(SYS)$(DEV)OnOff-SP") {
+    field(DTYP, "stream")
+    field(OUT, "@waveformIOC.proto setOnOff() $(PORT)")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
+}
+
+record(bo, "$(SYS)$(DEV)Reset-CMD") {
+    field(DTYP, "stream")
+    field(OUT, "@waveformIOC.proto resetDevice() $(PORT)")
+    field(VAL, "0")
+    field(ZNAM, "No Reset")
+    field(ONAM, "Reset")
+}
+
+record(stringin, "$(SYS)$(DEV)SystemDate-RB") {
+    field(DTYP, "stream")
+    field(INP, "@waveformIOC.proto getSystemDate() $(PORT)")
+    field(SCAN, "1 second")
+}
+
+record(stringin, "$(SYS)$(DEV)DeviceIdentity-RB") {
+    field(DTYP, "stream")
+    field(INP, "@waveformIOC.proto getIdentity() $(PORT)")
+    field(SCAN, "10 second")
+}

@@ -1,0 +1,59 @@
+# waveformIOC.proto
+#
+# StreamDevice protocol file for Keysight 33500B Waveform Generator
+#
+# Author : Kim Yunho
+# Date   : 2024-08-22
+# Version: 1.0
+
+Terminator = LF;
+
+# Define protocol for setting frequency
+setFrequency {
+    out "FREQ %f";
+}
+
+# Define protocol for reading frequency
+getFrequency {
+    out "FREQ?";
+    in "%f";
+}
+
+# Define protocol for setting amplitude
+setAmplitude {
+    out "VOLT %f";
+}
+
+# Define protocol for reading amplitude
+getAmplitude {
+    out "VOLT?";
+    in "%f";
+}
+
+# Define protocol for setting output on/off
+setOnOff {
+    out "OUTP %d";
+}
+
+# Define protocol for reading output on/off
+getOnOff {
+    out "OUTP?";
+    in "%d";
+}
+
+# Define protocol for resetting the device
+resetDevice {
+    out "*RST";
+}
+
+# Define protocol for getting the system Date
+getSystemDate {
+    out "SYST:DATE?";
+    in "%s";
+}
+
+# Define protocol for getting the device identity
+getIdentity {
+    out "*IDN?";
+    in "%s";
+}
