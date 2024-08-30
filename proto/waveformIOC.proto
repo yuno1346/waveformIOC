@@ -8,6 +8,10 @@
 
 Terminator = LF;
 
+cmd {
+    out "\$1";
+}
+
 # Define protocol for setting frequency
 setFrequency {
     out "FREQ %f";
