@@ -25,7 +25,11 @@ cmd
 setD 
 {
     out "\$1 %d";
-    @init { out "\$1?"; in "%d"; }
+    @init 
+    {
+        out "\$1?";
+        in "%d";
+    }
 }
 
 getD
@@ -40,8 +44,7 @@ setF
     out "\$1 %f";
     @init 
     { 
-        out "\$1?"; 
-        in "%d"; 
+        getF;
     }
 }
 

@@ -10,7 +10,6 @@ record(ai, "$(SYS)$(DEV)Frequency-RB")
 {
     field(DTYP, "stream")
     field(INP,  "@waveformIOC.proto getF(FREQ) $(PORT)")
-    field(SCAN, "1 second")
 }
 
 record(ao, "$(SYS)$(DEV)Frequency-SP")
@@ -24,7 +23,6 @@ record(ai, "$(SYS)$(DEV)Amplitude-RB")
 {
     field(DTYP, "stream")
     field(INP,  "@waveformIOC.proto getD(VOLT) $(PORT)")
-    field(SCAN, "1 second")
 }
 
 record(ao, "$(SYS)$(DEV)Amplitude-SP")
@@ -41,7 +39,6 @@ record(bi, "$(SYS)$(DEV)OnOff-RB")
     field(INP, "@waveformIOC.proto getD(OUTP) $(PORT)")
     field(ZNAM, "0")
     field(ONAM, "1")
-    field(SCAN, "1 second")
 }
 
 # New bo record for on/off control (write)
@@ -66,15 +63,11 @@ record(stringin, "$(SYS)$(DEV)SystemDate-RB")
 {
     field(DTYP, "stream")
     field(INP, "@waveformIOC.proto cmd(SYST:DATE?) $(PORT)")
-    field(SCAN, "1 second")
 }
 
 record(stringin, "$(SYS)$(DEV)DeviceIdentity-RB")
 {
     field(DTYP, "stream")
     field(INP, "@waveformIOC.proto cmd(*IDN?) $(PORT)")
-    field(SCAN, "10 second")
-    field(NELM, "256")
-    field(FTVL, "CHAR")
     field(PINI, "YES")
 }
