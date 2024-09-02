@@ -4,7 +4,7 @@
 #
 # Author : Kim Yunho(kim.yh@postech.ac.kr)
 # Date   : 2024-09-02
-# Version: 1.1
+# Version: 0.1
 
 @writetimeout { disconnect; }
 @replytimeout { disconnect; }
@@ -44,7 +44,8 @@ setF
     out "\$1 %f";
     @init 
     { 
-        getF;
+        out "\$1?";
+        in "%f";
     }
 }
 
