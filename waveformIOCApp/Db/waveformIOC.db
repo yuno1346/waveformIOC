@@ -72,9 +72,6 @@ record(stringin, "$(SYS)$(DEV)SystemDate-RB")
 record(stringin, "$(SYS)$(DEV)DeviceIdentity-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto cmd(*IDN?) $(PORT)")
-    field(SCAN, "10 second")
-    field(NELM, "256")
-    field(FTVL, "CHAR")
+    field(INP, "@waveformIOC.proto getIDN(119) $(PORT)")
     field(PINI, "YES")
 }
