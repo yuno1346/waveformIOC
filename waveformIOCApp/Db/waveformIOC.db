@@ -2,35 +2,35 @@
 #
 # EPICS database file for Keysight 33500B Waveform Generator
 #
-# Author : Kim Yunho
+# Author : Kim Yunho(kim.yh@postech.ac.kr)
 # Date   : 2024-08-22
 # Version: 1.0
 
 record(ai, "$(SYS)$(DEV)Frequency-RB")
 {
     field(DTYP, "stream")
-    field(INP,  "@waveformIOC.proto getFrequency() $(PORT)")
+    field(INP,  "@waveformIOC.proto getF(FREQ) $(PORT)")
     field(SCAN, "1 second")
 }
 
 record(ao, "$(SYS)$(DEV)Frequency-SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@waveformIOC.proto setFrequency() $(PORT)")
+    field(OUT,  "@waveformIOC.proto setF(FREQ) $(PORT)")
     field(PREC, "3")
 }
 
 record(ai, "$(SYS)$(DEV)Amplitude-RB")
 {
     field(DTYP, "stream")
-    field(INP,  "@waveformIOC.proto getAmplitude() $(PORT)")
+    field(INP,  "@waveformIOC.proto getD(VOLT) $(PORT)")
     field(SCAN, "1 second")
 }
 
 record(ao, "$(SYS)$(DEV)Amplitude-SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@waveformIOC.proto setAmplitude() $(PORT)")
+    field(OUT,  "@waveformIOC.proto setD(VOLT) $(PORT)")
     #field(PREC, "3")
 }
 
@@ -38,7 +38,7 @@ record(ao, "$(SYS)$(DEV)Amplitude-SP")
 record(bi, "$(SYS)$(DEV)OnOff-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto getOnOff() $(PORT)")
+    field(INP, "@waveformIOC.proto getD(OUTP) $(PORT)")
     field(ZNAM, "0")
     field(ONAM, "1")
     field(SCAN, "1 second")
@@ -48,7 +48,7 @@ record(bi, "$(SYS)$(DEV)OnOff-RB")
 record(bo, "$(SYS)$(DEV)OnOff-SP")
 {
     field(DTYP, "stream")
-    field(OUT, "@waveformIOC.proto setOnOff() $(PORT)")
+    field(OUT, "@waveformIOC.proto setD(OUTP) $(PORT)")
     field(ZNAM, "Off")
     field(ONAM, "On")
 }
@@ -56,7 +56,7 @@ record(bo, "$(SYS)$(DEV)OnOff-SP")
 record(bo, "$(SYS)$(DEV)Reset-CMD")
 {
     field(DTYP, "stream")
-    field(OUT, "@waveformIOC.proto resetDevice() $(PORT)")
+    field(OUT, "@waveformIOC.proto cmd(*RST) $(PORT)")
     field(VAL, "0")
     field(ZNAM, "No Reset")
     field(ONAM, "Reset")
@@ -65,13 +65,16 @@ record(bo, "$(SYS)$(DEV)Reset-CMD")
 record(stringin, "$(SYS)$(DEV)SystemDate-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto getSystemDate() $(PORT)")
+    field(INP, "@waveformIOC.proto cmd(SYST:DATE?) $(PORT)")
     field(SCAN, "1 second")
 }
 
 record(stringin, "$(SYS)$(DEV)DeviceIdentity-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto getIdentity() $(PORT)")
+    field(INP, "@waveformIOC.proto cmd(*IDN?) $(PORT)")
     field(SCAN, "10 second")
+    field(NELM, "256")
+    field(FTVL, "CHAR")
+    field(PINI, "YES")
 }

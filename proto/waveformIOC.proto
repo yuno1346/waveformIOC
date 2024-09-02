@@ -2,38 +2,54 @@
 #
 # StreamDevice protocol file for Keysight 33500B Waveform Generator
 #
-# Author : Kim Yunho
+# Author : Kim Yunho(kim.yh@postech.ac.kr)
 # Date   : 2024-09-02
 # Version: 1.1
 
+@writetimeout { disconnect; }
+@replytimeout { disconnect; }
+@readtimeout  { disconnect; }
+@mismatch     { disconnect; }
+
+ReplyTimeout = 3000;
+InTerminator = "\r";
+OutTerminator = "\r";
 Terminator = CR LF;
 
 # Ragular expression
-cmd 
+cmd
 {
-    out "$1";
+    out "\$1";
 }
 
 setD 
 {
-    out "$1 %d";
+    out "\$1 %d";
+    @init { out "\$1?"; in "%d"; }
 }
 
 getD
 {
-    out "$1?";
+    out "\$1?";
     in "%d";
+    ExtraInput = Ignore;
 }
 
 setF
 {
-    out "$1 %f";
+    out "\$1 %f";
+    @init 
+    { 
+        out "\$1?"; 
+        in "%d"; 
+    }
 }
 
 getF
 {
-    out "$1?";
+    out "\$1?";
     in "%f";
+    ExtraInput = Ignore;
 }
 
 # Define protocol for setting frequency
