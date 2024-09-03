@@ -12,9 +12,9 @@
 @mismatch     { disconnect; }
 
 ReplyTimeout = 3000;
-InTerminator = "\r";
-OutTerminator = "\r";
-Terminator = CR LF;
+InTerminator = "\n";
+OutTerminator = "\n";
+Terminator = "\n";
 
 # Ragular expression
 cmd
@@ -25,7 +25,7 @@ cmd
 setD 
 {
     out "\$1 %d";
-    @init 
+    @init
     {
         out "\$1?";
         in "%d";
@@ -42,7 +42,7 @@ getD
 setF
 {
     out "\$1 %f";
-    @init 
+    @init
     { 
         out "\$1?";
         in "%f";
@@ -53,5 +53,11 @@ getF
 {
     out "\$1?";
     in "%f";
+    ExtraInput = Ignore;
+}
+
+getIDN {
+    out "*IDN?";
+    in "%\$1[^\r\n]";
     ExtraInput = Ignore;
 }

@@ -6,36 +6,36 @@
 # Date   : 2024-09-02
 # Version: 0.1
 
-record(ai, "$(SYS)$(DEV)Frequency-RB")
+record(ai, "$(SYS):$(DEV):Frequency-RB")
 {
     field(DTYP, "stream")
     field(INP,  "@waveformIOC.proto getF(FREQ) $(PORT)")
 }
 
-record(ao, "$(SYS)$(DEV)Frequency-SP")
+record(ao, "$(SYS):$(DEV):Frequency-SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@waveformIOC.proto setF(FREQ) $(PORT)")
     field(PREC, "3")
-    field(FLNK, "$(SYS)$(DEV)Frequency-RB")
+    field(FLNK, "$(SYS):$(DEV):Frequency-RB")
 }
 
-record(ai, "$(SYS)$(DEV)Amplitude-RB")
+record(ai, "$(SYS):$(DEV):Amplitude-RB")
 {
     field(DTYP, "stream")
-    field(INP,  "@waveformIOC.proto getD(VOLT) $(PORT)")
+    field(INP,  "@waveformIOC.proto getF(VOLT) $(PORT)")
 }
 
-record(ao, "$(SYS)$(DEV)Amplitude-SP")
+record(ao, "$(SYS):$(DEV):Amplitude-SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@waveformIOC.proto setD(VOLT) $(PORT)")
+    field(OUT,  "@waveformIOC.proto setF(VOLT) $(PORT)")
     field(PREC, "3")
-    field(FLNK, "$(SYS)$(DEV)Amplitude-RB")
+    field(FLNK, "$(SYS):$(DEV):Amplitude-RB")
 }
 
 # New bi record for on/off status (read)
-record(bi, "$(SYS)$(DEV)OnOff-RB")
+record(bi, "$(SYS):$(DEV):OnOff-RB")
 {
     field(DTYP, "stream")
     field(INP, "@waveformIOC.proto getD(OUTP) $(PORT)")
@@ -44,7 +44,7 @@ record(bi, "$(SYS)$(DEV)OnOff-RB")
 }
 
 # New bo record for on/off control (write)
-record(bo, "$(SYS)$(DEV)OnOff-SP")
+record(bo, "$(SYS):$(DEV):OnOff-SP")
 {
     field(DTYP, "stream")
     field(OUT, "@waveformIOC.proto setD(OUTP) $(PORT)")
@@ -52,22 +52,22 @@ record(bo, "$(SYS)$(DEV)OnOff-SP")
     field(ONAM, "On")
 }
 
-record(bo, "$(SYS)$(DEV)Reset-CMD")
+record(bo, "$(SYS):$(DEV):Reset-CMD")
 {
     field(DTYP, "stream")
     field(OUT, "@waveformIOC.proto cmd(*RST) $(PORT)")
     field(PINI, "YES")
 }
 
-record(stringin, "$(SYS)$(DEV)SystemDate-RB")
+record(stringin, "$(SYS):$(DEV):SystemDate-RB")
 {
     field(DTYP, "stream")
     field(INP, "@waveformIOC.proto cmd(SYST:DATE?) $(PORT)")
 }
 
-record(stringin, "$(SYS)$(DEV)DeviceIdentity-RB")
+record(stringin, "$(SYS):$(DEV):DeviceIdentity-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto cmd(*IDN?) $(PORT)")
+    field(INP, "@waveformIOC.proto getIDN(40) $(PORT)")
     field(PINI, "YES")
 }
