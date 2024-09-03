@@ -34,6 +34,33 @@ record(ao, "$(SYS):$(DEV):Amplitude-SP")
     field(FLNK, "$(SYS):$(DEV):Amplitude-RB")
 }
 
+record(ao, "$(SYS):$(DEV):Offset-SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@waveformIOC.proto setF(VOLT:OFFS) $(PORT)")
+    field(PREC, "3")
+    field(FLNK, "$(SYS):$(DEV):Offset-RB")
+}
+
+record(ai, "$(SYS):$(DEV):Offset-RB")
+{
+    field(DTYP, "stream")
+    field(INP,  "@waveformIOC.proto getF(VOLT:OFFS) $(PORT)")
+}
+
+record(ao, "$(SYS):$(DEV):Phase-SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@waveformIOC.proto setF(PHAS) $(PORT)")
+    field(PREC, "3")
+}
+
+record(ai, "$(SYS):$(DEV):Phase-RB")
+{
+    field(DTYP, "stream")
+    field(INP,  "@waveformIOC.proto getF(PHAS) $(PORT)")
+}
+
 # New bi record for on/off status (read)
 record(bi, "$(SYS):$(DEV):OnOff-RB")
 {
@@ -57,12 +84,6 @@ record(bo, "$(SYS):$(DEV):Reset-CMD")
     field(DTYP, "stream")
     field(OUT, "@waveformIOC.proto cmd(*RST) $(PORT)")
     field(PINI, "YES")
-}
-
-record(stringin, "$(SYS):$(DEV):SystemDate-RB")
-{
-    field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto cmd(SYST:DATE?) $(PORT)")
 }
 
 record(stringin, "$(SYS):$(DEV):DeviceIdentity-RB")
