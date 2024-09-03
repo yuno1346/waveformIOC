@@ -89,6 +89,6 @@ record(bo, "$(SYS):$(DEV):Reset-CMD")
 record(stringin, "$(SYS):$(DEV):DeviceIdentity-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto getIDN(40) $(PORT)")
+    field(INP, "@waveformIOC.proto getIDN(200) $(PORT)")
     field(PINI, "YES")
 }
