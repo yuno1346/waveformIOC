@@ -18,7 +18,7 @@ drvAsynIPPortConfigure("L0", "169.254.5.21:5025")
 
 ## Load record instances
 #dbLoadRecords("waveformIOC.db","user=kyh")
-dbLoadRecords("/home/kyh/EPICS/IOCs/waveformIOC/waveformIOCApp/Db/waveformIOC.db", "SYS=KEYSIGHT:, DEV=33500B:, PORT=L0")
+dbLoadRecords("/home/kyh/EPICS/IOCs/waveformIOC/waveformIOCApp/Db/waveformIOC.db", "SYS=KEYSIGHT, DEV=33500B, PORT=L0")
 
 cd ${TOP}/iocBoot/${IOC}
 iocInit()

@@ -4,7 +4,7 @@
 #
 # Author : Kim Yunho(kim.yh@postech.ac.kr)
 # Date   : 2024-09-02
-# Version: 1.1
+# Version: 0.1
 
 @writetimeout { disconnect; }
 @replytimeout { disconnect; }
@@ -12,9 +12,9 @@
 @mismatch     { disconnect; }
 
 ReplyTimeout = 3000;
-InTerminator = "\r";
-OutTerminator = "\r";
-Terminator = CR LF;
+InTerminator = LF;
+OutTerminator = LF;
+Terminator = LF;
 
 # Ragular expression
 cmd
@@ -25,7 +25,11 @@ cmd
 setD 
 {
     out "\$1 %d";
-    @init { out "\$1?"; in "%d"; }
+    @init
+    {
+        out "\$1?";
+        in "%d";
+    }
 }
 
 getD
@@ -38,10 +42,10 @@ getD
 setF
 {
     out "\$1 %f";
-    @init 
+    @init
     { 
-        out "\$1?"; 
-        in "%d"; 
+        out "\$1?";
+        in "%f";
     }
 }
 
@@ -50,19 +54,6 @@ getF
     out "\$1?";
     in "%f";
     ExtraInput = Ignore;
-}
-
-# Define protocol for setting frequency
-setFrequency
-{
-    out "FREQ %f";
-}
-
-# Define protocol for reading frequency
-getFrequency
-{
-    out "FREQ?";
-    in "%f";
 }
 
 getIDN {

@@ -3,75 +3,91 @@
 # EPICS database file for Keysight 33500B Waveform Generator
 #
 # Author : Kim Yunho(kim.yh@postech.ac.kr)
-# Date   : 2024-08-22
-# Version: 1.0
+# Date   : 2024-09-02
+# Version: 0.1
 
-record(ai, "$(SYS)$(DEV)Frequency-RB")
+record(ai, "$(SYS):$(DEV):Frequency-RB")
 {
     field(DTYP, "stream")
     field(INP,  "@waveformIOC.proto getF(FREQ) $(PORT)")
-    field(SCAN, "1 second")
 }
 
-record(ao, "$(SYS)$(DEV)Frequency-SP")
+record(ao, "$(SYS):$(DEV):Frequency-SP")
 {
     field(DTYP, "stream")
     field(OUT,  "@waveformIOC.proto setF(FREQ) $(PORT)")
     field(PREC, "3")
+    field(FLNK, "$(SYS):$(DEV):Frequency-RB")
 }
 
-record(ai, "$(SYS)$(DEV)Amplitude-RB")
+record(ai, "$(SYS):$(DEV):Amplitude-RB")
 {
     field(DTYP, "stream")
-    field(INP,  "@waveformIOC.proto getD(VOLT) $(PORT)")
-    field(SCAN, "1 second")
+    field(INP,  "@waveformIOC.proto getF(VOLT) $(PORT)")
 }
 
-record(ao, "$(SYS)$(DEV)Amplitude-SP")
+record(ao, "$(SYS):$(DEV):Amplitude-SP")
 {
     field(DTYP, "stream")
-    field(OUT,  "@waveformIOC.proto setD(VOLT) $(PORT)")
-    #field(PREC, "3")
+    field(OUT,  "@waveformIOC.proto setF(VOLT) $(PORT)")
+    field(PREC, "3")
+    field(FLNK, "$(SYS):$(DEV):Amplitude-RB")
 }
 
-# New bi record for on/off status (read)
-record(bi, "$(SYS)$(DEV)OnOff-RB")
+record(ao, "$(SYS):$(DEV):Offset-SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@waveformIOC.proto setF(VOLT:OFFS) $(PORT)")
+    field(PREC, "3")
+    field(FLNK, "$(SYS):$(DEV):Offset-RB")
+}
+
+record(ai, "$(SYS):$(DEV):Offset-RB")
+{
+    field(DTYP, "stream")
+    field(INP,  "@waveformIOC.proto getF(VOLT:OFFS) $(PORT)")
+}
+
+record(ao, "$(SYS):$(DEV):Phase-SP")
+{
+    field(DTYP, "stream")
+    field(OUT,  "@waveformIOC.proto setF(PHAS) $(PORT)")
+    field(PREC, "3")
+}
+
+record(ai, "$(SYS):$(DEV):Phase-RB")
+{
+    field(DTYP, "stream")
+    field(INP,  "@waveformIOC.proto getF(PHAS) $(PORT)")
+}
+
+record(bi, "$(SYS):$(DEV):OnOff-RB")
 {
     field(DTYP, "stream")
     field(INP, "@waveformIOC.proto getD(OUTP) $(PORT)")
-    field(ZNAM, "0")
-    field(ONAM, "1")
-    field(SCAN, "1 second")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
 }
 
-# New bo record for on/off control (write)
-record(bo, "$(SYS)$(DEV)OnOff-SP")
+record(bo, "$(SYS):$(DEV):OnOff-SP")
 {
     field(DTYP, "stream")
     field(OUT, "@waveformIOC.proto setD(OUTP) $(PORT)")
     field(ZNAM, "Off")
     field(ONAM, "On")
+    field(FLNK, "$(SYS):$(DEV):OnOff-RB")
 }
 
-record(bo, "$(SYS)$(DEV)Reset-CMD")
+record(bo, "$(SYS):$(DEV):Reset-CMD")
 {
     field(DTYP, "stream")
     field(OUT, "@waveformIOC.proto cmd(*RST) $(PORT)")
-    field(VAL, "0")
-    field(ZNAM, "No Reset")
-    field(ONAM, "Reset")
+    field(PINI, "YES")
 }
 
-record(stringin, "$(SYS)$(DEV)SystemDate-RB")
+record(stringin, "$(SYS):$(DEV):DeviceIdentity-RB")
 {
     field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto cmd(SYST:DATE?) $(PORT)")
-    field(SCAN, "1 second")
-}
-
-record(stringin, "$(SYS)$(DEV)DeviceIdentity-RB")
-{
-    field(DTYP, "stream")
-    field(INP, "@waveformIOC.proto getIDN(119) $(PORT)")
+    field(INP, "@waveformIOC.proto getIDN(200) $(PORT)")
     field(PINI, "YES")
 }
