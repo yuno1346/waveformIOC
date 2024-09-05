@@ -58,6 +58,6 @@ getF
 
 getIDN {
     out "*IDN?";
-    in "%\$1[\r\n]";
+    in "%\$1[^\r\n]";
     ExtraInput = Ignore;
 }
