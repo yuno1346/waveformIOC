@@ -3,7 +3,7 @@
 # EPICS database file for Keysight 33500B Waveform Generator
 #
 # Author : Kim Yunho(kim.yh@postech.ac.kr)
-# Date   : 2024-09-02
+# Date   : 2024-09-05
 # Version: 0.1
 
 record(ai, "$(SYS):$(DEV):Frequency-RB")
